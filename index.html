@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {             //jQuery
+        $('#search').keyup(function () {        //event
+            let search = $('#search').val();    //getting value of input
+            $.ajax({                            // ajax
+                url:'search.php',
+                data:{search:search},
+                type:'POST',
+                success:function (data) {
+                    if(!data.error){
+                        $('#result').html(data);
+                    }
+                }
+            });
+        });
+    });
+</script>
+    <div class="container">
+        <div class="row">
+            <h2>Search</h2>
+            <input type="text" placeholder="Search" name="search" class="form-control" id="search">
+            <h4 class="bg-success" id="result"></h4>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <input type='text' name="car_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" name="addCar" class="btn btn-primary">
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
